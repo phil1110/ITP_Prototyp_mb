@@ -1,0 +1,9 @@
+﻿.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.nav-item {
+	display: inline-block;
+	margin-right: 10px;
+}
