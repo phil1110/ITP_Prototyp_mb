@@ -1,46 +1,33 @@
 ﻿@page "/fetchdata"
 
 @using ITP_Prototyp_mb.Data
-@inject WeatherForecastService ForecastService
+@inject IJSRuntime jsRuntime
 
-<h1>Weather forecast</h1>
+<h1>Prior Locations</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
+<p>All requests for prior locations are listed here.</p>
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (string location in locations)
+        {
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <td>@location</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
 
 @code {
-    private WeatherForecast[] forecasts;
+    private List<string> locations;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        locations = new Locations().GetLocations();
     }
 }

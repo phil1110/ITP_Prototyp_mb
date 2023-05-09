@@ -1,1 +1,7 @@
-﻿
+﻿.nav-link.active span {
+	font-weight: bold;
+	background-color: #ffc107; /* change to desired color */
+	color: #fff; /* change to desired color */
+	border-radius: 5px; /* change to desired value */
+	padding: 10px; /* change to desired value */
+}

@@ -1,12 +1,18 @@
-﻿<nav class="d-inline-flex fixed-bottom nav-justified bg-primary p-2">
-    <NavLink class="nav-link nav-item text-white" href="">
-        <span>Home</span>
+﻿<nav class="d-inline-flex fixed-bottom nav-justified bg-primary p-2 align-items-center">
+    <NavLink class="nav-link nav-item text-white" href="weather">
+        <span class="oi oi-cloudy fs-1"></span>
     </NavLink>
-    <NavLink class="nav-link nav-item text-white" href="counter">
-        <span>Counter</span>
+
+    <span class="separator fs-5 text-white">|</span>
+
+    <NavLink class="nav-link nav-item text-white" href="/" Match="NavLinkMatch.All">
+        <span class="oi oi-home fs-1"></span>
     </NavLink>
+
+    <span class="separator fs-5 text-white">|</span>
+
     <NavLink class="nav-link nav-item text-white" href="fetchdata">
-        <span>Fetch Data</span>
+        <span class="oi oi-list fs-1"></span>
     </NavLink>
 </nav>
 

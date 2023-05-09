@@ -1,9 +1,36 @@
 ﻿@page "/"
+@using ITP_Prototyp_mb.Data
+@inject IJSRuntime jsRuntime
 
-<h1>Hello, world!</h1>
+<div class="container">
+	<h1>Welcome!</h1>
+	<p>This App provides the first .NET MAUI + BLAZOR Prototype for our School project.</p>
+</div>
 
-Welcome to your new app.
+<br/>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="container">
+	<form class="city-form" onsubmit="@HandleSubmit">
+		<h3>Enter the location for your weather request.</h3>
 
-<Counter IncrementAmount="10" />
+		<br />
+
+		<input type="text" @bind="location" />
+		<button type="submit">Submit</button>
+	</form>
+</div>
+
+
+
+@code{
+	private string location;
+	WeatherData weatherData = new WeatherData();
+	Locations locations = new Locations();
+
+	private async void HandleSubmit()
+	{
+		locations.AddLocation(location);
+		weatherData.GetWeather(location);
+		location = "";
+	}
+}

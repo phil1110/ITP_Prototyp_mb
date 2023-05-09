@@ -1,0 +1,65 @@
+﻿@page "/weather"
+@using ITP_Prototyp_mb.Data
+@inject IJSRuntime jsRuntime
+
+<div class="container w-100">
+	<h1 class="text-center">Weather</h1>
+</div>
+
+@if(weatherData.Location != null && weatherData.CurrentCondition != null && weatherData != null)
+{
+    <div class="container w-100">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>City Name</td>
+                    <td>@weatherData.Location.Name</td>
+                </tr>
+                <tr>
+                    <td>Region Name</td>
+                    <td>@weatherData.Location.Region</td>
+                </tr>
+                <tr>
+                    <td>Country Name</td>
+                    <td>@weatherData.Location.Country</td>
+                </tr>
+            </tbody>
+
+            <tbody>
+                <tr>
+                    <td>Temperature (Celcius)</td>
+                    <td>@weatherData.CurrentCondition.TemperatureCelsius</td>
+                </tr>
+                <tr>
+                    <td>Wind speed (kph)</td>
+                    <td>@weatherData.CurrentCondition.WindSpeedKph</td>
+                </tr>
+                <tr>
+                    <td>Current Condition</td>
+                    <td>@weatherData.CurrentCondition.Condition.Text</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h1>No data existing. Try to create a new request.</h1>
+}
+
+
+@code{
+    Locations locations = new Locations();
+    WeatherData weatherData = new WeatherData();
+
+    protected override void OnInitialized()
+    {
+        weatherData = weatherData.GetSavedWeather();
+    }
+}
