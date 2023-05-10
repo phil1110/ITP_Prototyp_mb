@@ -5,11 +5,12 @@ using Microsoft.JSInterop;
 using static System.Net.WebRequestMethods;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Maui;
+using ITP_Prototyp_mb.Lib.Weather;
 
 public class WeatherData
 {
 	[JsonProperty("location")]
-	public Location Location { get; set; }
+	public ITP_Prototyp_mb.Lib.Weather.Location Location { get; set; }
 
 	[JsonProperty("current")]
 	public CurrentCondition CurrentCondition { get; set; }
@@ -28,7 +29,10 @@ public class WeatherData
 
 	private void SaveWeather(string json)
 	{
-		Preferences.Set("weather", json);
+		if(json != null && json != "")
+		{
+            Preferences.Set("weather", json);
+        }
 	}
 
 	public WeatherData GetSavedWeather()
@@ -44,32 +48,4 @@ public class WeatherData
 	}
 }
 
-public class Location
-{
-	[JsonProperty("name")]
-	public string Name { get; set; }
 
-	[JsonProperty("region")]
-	public string Region { get; set; }
-
-	[JsonProperty("country")]
-	public string Country { get; set; }
-}
-
-public class CurrentCondition
-{
-	[JsonProperty("temp_c")]
-	public double TemperatureCelsius { get; set; }
-
-	[JsonProperty("condition")]
-	public Condition Condition { get; set; }
-
-	[JsonProperty("wind_kph")]
-	public double WindSpeedKph { get; set; }
-}
-
-public class Condition
-{
-	[JsonProperty("text")]
-	public string Text { get; set; }
-}

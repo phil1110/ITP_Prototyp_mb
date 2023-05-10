@@ -15,9 +15,11 @@
 
 		<br />
 
-		<input type="text" @bind="location" />
-		<button type="submit">Submit</button>
+		<input type="text" @bind="location" class="form-control" />
+		<button disabled="@btnDisabled" type="submit" class="btn-block btn-primary">Submit</button>
 	</form>
+
+	<h4>Please wait. Your request is being processed.</h4>
 </div>
 
 
@@ -26,11 +28,24 @@
 	private string location;
 	WeatherData weatherData = new WeatherData();
 	Locations locations = new Locations();
+	bool btnDisabled = false;
 
 	private async void HandleSubmit()
 	{
-		locations.AddLocation(location);
-		weatherData.GetWeather(location);
+		btnDisabled = true;
+		try
+		{
+			WeatherData weather = weatherData.GetWeather(location);
+		}
+		catch
+		{
+			await Application.Current.MainPage.DisplayAlert("Error", $"No weather found for {location}", "OK");
+		}
+		finally
+		{
+			locations.AddLocation(location);
+		}
+
 		location = "";
 	}
 }
