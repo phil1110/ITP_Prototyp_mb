@@ -5,3 +5,8 @@
 	border-radius: 5px; /* change to desired value */
 	padding: 10px; /* change to desired value */
 }
+
+nav {
+	z-index: 9999;
+	overflow: hidden;	
+}
